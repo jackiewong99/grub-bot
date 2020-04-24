@@ -1,0 +1,194 @@
+$primary-color: rgb(246, 126, 125);
+$secondary-color: rgb(255, 186, 151);
+$white: rgb(255, 255, 255);
+$gray: rgb(237, 237, 237);
+$black: rgb(0, 0, 0);
+$blue: rgb(109, 187, 255);
+
+// General
+
+body {
+  background: $primary-color;
+}
+
+hr {
+  margin: 0;
+  width: 100%;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+// Home View
+
+.home-view {
+  display: grid;
+  grid-template-columns: 28rem 55rem 28rem;
+  grid-template-rows: 9rem 43rem 3rem;
+  grid-template-areas:
+    'logo searchbar about'
+    '. chatbot .'
+    '. . .';
+}
+
+// Header
+
+.project-logo {
+  grid-area: logo;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.project-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.search-section {
+  grid-area: searchbar;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.search-bar {
+  background: $white;
+  width: 80%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  border-radius: 25px;
+
+  .search-text {
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+    height: 100px;
+    font-size: 2rem;
+    padding: 15px;
+
+    &::placeholder {
+      font-size: 2rem;
+      color: rgb(214, 214, 214);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 15px $secondary-color;
+    }
+  }
+}
+
+.about-popup {
+  grid-area: about;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.about-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+// Chat Bot
+
+.container-chat {
+  grid-area: chatbot;
+  display: grid;
+  grid-template-columns: 20px auto 20px;
+  grid-template-rows: 18% 2% 60% 2% 18%;
+  grid-template-areas:
+    '. botname .'
+    'border1 border1 border1'
+    '. messages .'
+    'border2 border2 border2'
+    '. replies .';
+
+  background: $white;
+  width: 60%;
+  height: 90%;
+  justify-self: center;
+  border-radius: 25px;
+}
+
+.chat-header {
+  grid-area: botname;
+  justify-self: center;
+}
+
+.chat-name {
+  display: flex;
+  margin-top: 21px;
+}
+
+.chat-separator {
+  &--top {
+    grid-area: border1;
+  }
+  &--bottom {
+    grid-area: border2;
+  }
+}
+
+.container-chat-msg {
+  grid-area: messages;
+  overflow: auto;
+}
+
+.chat-msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 14px;
+  margin: 10px 20px;
+  border-radius: 10px;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-bottom: 0;
+    margin-top: -10px;
+  }
+
+  &--left {
+    background: $gray;
+    margin-right: 15rem;
+  }
+
+  &--right {
+    background: $blue;
+    margin-left: 15rem;
+  }
+
+  & p {
+    margin: 0;
+  }
+}
+
+.container-chat-replies {
+  grid-area: replies;
+  justify-self: center;
+  display: flex;
+  align-self: center;
+  height: 20px;
+}
+
+.chat-reply {
+  height: 0;
+  padding: 0 15px;
+}
