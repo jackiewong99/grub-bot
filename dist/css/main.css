@@ -68,7 +68,7 @@ hr {
   grid-area: chatbot;
   display: grid;
   grid-template-columns: 20px auto 20px;
-  grid-template-rows: 18% 2% 60% 2% 18%;
+  grid-template-rows: 10% 1% 60% 1% 28%;
   grid-template-areas: '. botname .' 'border1 border1 border1' '. messages .' 'border2 border2 border2' '. replies .';
   background: white;
   width: 60%;
@@ -78,17 +78,20 @@ hr {
 
 .chat-header {
   grid-area: botname;
-  justify-self: center; }
+  justify-self: center;
+  align-self: center; }
 
 .chat-name {
   display: flex;
   margin-top: 21px; }
 
 .chat-separator--top {
-  grid-area: border1; }
+  grid-area: border1;
+  align-self: center; }
 
 .chat-separator--bottom {
-  grid-area: border2; }
+  grid-area: border2;
+  align-self: center; }
 
 .container-chat-msg {
   grid-area: messages;
@@ -99,7 +102,7 @@ hr {
   flex-direction: row;
   justify-content: center;
   padding: 10px 14px;
-  margin: 10px 20px;
+  margin: 15px 20px;
   border-radius: 10px;
   position: relative; }
   .chat-msg:after {
@@ -114,9 +117,25 @@ hr {
   .chat-msg--left {
     background: #ededed;
     margin-right: 15rem; }
+    .chat-msg--left:after {
+      content: '';
+      border-left: 10px solid #ededed;
+      width: 0;
+      height: 0;
+      left: -25px;
+      top: 15px;
+      transform: rotate(-90deg); }
   .chat-msg--right {
     background: #6dbbff;
     margin-left: 15rem; }
+    .chat-msg--right:after {
+      content: '';
+      border-right: 10px solid #6dbbff;
+      width: 0;
+      height: 0;
+      left: 223px;
+      top: 15px;
+      transform: rotate(90deg); }
   .chat-msg p {
     margin: 0; }
 
@@ -125,7 +144,7 @@ hr {
   justify-self: center;
   display: flex;
   align-self: center;
-  height: 20px; }
+  height: 30px; }
 
 .chat-reply {
   height: 0;
