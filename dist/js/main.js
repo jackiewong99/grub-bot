@@ -28,29 +28,36 @@ const cuisines = [
   {
     set: '1',
     cuisineSet: ['American', 'Asian fusion', 'Cantonese', 'Chinese'],
+    btnSet: [],
   },
   {
     set: '2',
     cuisineSet: ['French', 'Greek', 'Indian', 'Italian'],
+    btnSet: [],
   },
   {
     set: '3',
     cuisineSet: ['Japanese', 'Korean', 'Mediterranean', 'Mexican'],
+    btnSet: [],
   },
   {
     set: '4',
-    cuisineSet: ['Middle Eastern', 'Moroccan', 'Spanish'],
+    cuisineSet: ['Middle Eastern', 'Moroccan', 'Spanish', 'Taiwanese'],
+    btnSet: [],
   },
   {
     set: '5',
-    cuisineSet: ['Taiwanese', 'Thai', 'Vegan', 'Vegetarian'],
+    cuisineSet: ['Thai', 'Vegan', 'Vegetarian'],
+    btnSet: [],
   },
 ];
 
 function init() {
   let chat = document.querySelector('.container-chat-msg');
+  let replies = document.querySelector('.container-chat-replies');
   let initMsg = document.createElement('div');
   let initPrompt = document.createElement('div');
+  let cuisineRow = createCuisineRow();
   let welcomeMsg = 'Welcome to Grub Bot!';
   let promptMsg = 'Start by selecting a cuisine of choice below. (Pick one)';
 
@@ -61,9 +68,46 @@ function init() {
 
   chat.appendChild(initMsg);
   chat.appendChild(initPrompt);
+
+  for (let i = 0; i < cuisines.length; i++) {
+    let btnSet = createCuisineBtn();
+
+    if (i === 4) {
+      btnSet.pop();
+    }
+
+    cuisines[i].btnSet = btnSet;
+
+    for (let j = 0; j < cuisines[i].btnSet.length; j++) {
+      cuisines[i].btnSet[j].innerHTML = cuisines[i].cuisineSet[j];
+      cuisineRow[i].appendChild(cuisines[i].btnSet[j]);
+    }
+  }
+
+  cuisineRow.forEach((row) => {
+    replies.appendChild(row);
+  });
 }
 
-function cuisineChoices() {}
+function createCuisineBtn() {
+  let arr = [];
+  for (let i = 0; i < 4; i++) {
+    let btn = document.createElement('button');
+    btn.classList.add('chat-reply');
+    arr.push(btn);
+  }
+  return arr;
+}
+
+function createCuisineRow() {
+  let arr = [];
+  for (let i = 0; i < 5; i++) {
+    let btnRow = document.createElement('div');
+    btnRow.classList.add('chat-replies');
+    arr.push(btnRow);
+  }
+  return arr;
+}
 
 function removeElement(elementId) {
   let element = document.querySelector(elementId);
@@ -71,5 +115,5 @@ function removeElement(elementId) {
 }
 
 window.onload = function () {
-  setTimeout(init, 750);
+  setTimeout(init, 500);
 };

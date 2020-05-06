@@ -141,11 +141,16 @@ hr {
 
 .container-chat-replies {
   grid-area: replies;
-  justify-self: center;
   display: flex;
-  align-self: center;
-  height: 30px; }
+  flex-flow: row wrap;
+  align-content: space-around; }
+
+.chat-replies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
 
 .chat-reply {
-  height: 0;
-  padding: 0 15px; }
+  padding: 0 10px;
+  margin: 0 25px; }
