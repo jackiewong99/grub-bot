@@ -84,7 +84,7 @@ function init() {
   setTimeout(() => {
     CHAT.appendChild(initPrompt);
     for (let i = 0; i < CUISINES.length; i++) {
-      let btnSet = createCuisineBtn(4);
+      let btnSet = createBtns(4);
 
       if (i === 4) {
         btnSet.pop();
@@ -114,7 +114,7 @@ function init() {
 }
 
 // Create buttons for choosing a cuisine for the initial prompt
-function createCuisineBtn(numBtns) {
+function createBtns(numBtns) {
   let arr = [];
   for (let i = 0; i < numBtns; i++) {
     let btn = document.createElement('button');
