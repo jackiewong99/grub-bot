@@ -24,7 +24,11 @@
 
 const PROXY_ADDRESS = 'http://localhost:3000/businesses';
 
-const cuisines = [
+const CHAT = document.querySelector('.container-chat-msg');
+const REPLIES = document.querySelector('.container-chat-replies');
+const REPLY_CLASS_LIST = ['chat-msg', 'chat-msg--right'];
+
+const CUISINES = [
   {
     set: '1',
     cuisineSet: ['American', 'Asian fusion', 'Cantonese', 'Chinese'],
@@ -52,7 +56,7 @@ const cuisines = [
   }
 ];
 
-const prompts = {
+const PROMPTS = {
   promptOne: 'Which cuisine are you craving? (Pick one)',
   promptTwo: 'How much are you willing to spend?',
   promptThree: 'Are you looking for a restaurant nearby?',
@@ -62,59 +66,57 @@ const prompts = {
 let userPref = [];
 
 // Main function for the chat bot
-function main() {
-  let chat = document.querySelector('.container-chat-msg');
-  let replies = document.querySelector('.container-chat-replies');
-  let initMsg = document.createElement('div');
-  let initPrompt = document.createElement('div');
-  let cuisineRow = createBtnRow(5);
-  let welcomeMsg = 'Welcome to Grub Bot!';
-  let promptMsg = prompts.promptOne;
+function init() {
+  const initMsg = document.createElement('div');
+  const initPrompt = document.createElement('div');
+  const cuisineRow = createBtnRow(5);
+  const welcomeMsg = 'Welcome to Grub Bot!';
+  const promptMsg = PROMPTS.promptOne;
 
   initMsg.classList.add('chat-msg', 'chat-msg--left');
   initPrompt.classList.add('chat-msg', 'chat-msg--left');
   initMsg.innerHTML = welcomeMsg;
   initPrompt.innerHTML = promptMsg;
 
-  chat.appendChild(initMsg);
+  CHAT.appendChild(initMsg);
 
   // Delay first prompt after the initial message is shown.
   setTimeout(() => {
-    chat.appendChild(initPrompt);
-    for (let i = 0; i < cuisines.length; i++) {
-      let btnSet = createCuisineBtn();
+    CHAT.appendChild(initPrompt);
+    for (let i = 0; i < CUISINES.length; i++) {
+      let btnSet = createCuisineBtn(4);
 
       if (i === 4) {
         btnSet.pop();
       }
 
-      cuisines[i].btnSet = btnSet;
+      CUISINES[i].btnSet = btnSet;
 
-      for (let j = 0; j < cuisines[i].btnSet.length; j++) {
-        cuisines[i].btnSet[j].innerHTML = cuisines[i].cuisineSet[j];
-        cuisines[i].btnSet[j].addEventListener('click', function () {
-          userPref.push(cuisines[i].btnSet[j].innerHTML);
+      for (let j = 0; j < CUISINES[i].btnSet.length; j++) {
+        CUISINES[i].btnSet[j].innerHTML = CUISINES[i].cuisineSet[j];
+        CUISINES[i].btnSet[j].addEventListener('click', function () {
+          userPref.push(CUISINES[i].btnSet[j].innerHTML);
 
           removeBtnRows('.chat-replies');
-          let reply = document.createElement('div');
-          reply.classList.add('chat-msg', 'chat-msg--right');
+          const reply = document.createElement('div');
+          reply.classList.add(REPLY_CLASS_LIST[0], REPLY_CLASS_LIST[1]);
           reply.innerHTML = userPref[0];
-          chat.appendChild(reply);
+          CHAT.appendChild(reply);
         });
-        cuisineRow[i].appendChild(cuisines[i].btnSet[j]);
+        cuisineRow[i].appendChild(CUISINES[i].btnSet[j]);
       }
     }
 
     cuisineRow.forEach((row) => {
-      replies.appendChild(row);
+      REPLIES.appendChild(row);
     });
   }, 750);
 }
 
 // Create buttons for choosing a cuisine for the initial prompt
-function createCuisineBtn() {
+function createCuisineBtn(numBtns) {
   let arr = [];
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < numBtns; i++) {
     let btn = document.createElement('button');
     btn.classList.add('chat-reply');
     arr.push(btn);
@@ -142,5 +144,5 @@ function removeBtnRows(elementId) {
 
 // On load and after 750ms, call the initialize function 'init'
 window.onload = function () {
-  setTimeout(main, 750);
+  setTimeout(init, 750);
 };
