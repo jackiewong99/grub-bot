@@ -22,13 +22,8 @@
 
 // ************************************************************************************************************************
 
-const PROXY_ADDRESS = 'http://localhost:3000/businesses';
-
 const CHAT = document.querySelector('.container-chat-msg');
-const REPLIES = document.querySelector('.container-chat-replies');
-const REPLY_CLASS_LIST = ['chat-msg', 'chat-msg--right'];
-
-const CUISINES = [
+const cuisines = [
   {
     set: '1',
     cuisineSet: ['American', 'Asian fusion', 'Cantonese', 'Chinese'],
@@ -56,12 +51,22 @@ const CUISINES = [
   }
 ];
 
+const PRICE_RANGE = ['$', '$$', '$$$', '$$$$'];
 const PROMPTS = {
   promptOne: 'Which cuisine are you craving? (Pick one)',
   promptTwo: 'How much are you willing to spend?',
   promptThree: 'Are you looking for a restaurant nearby?',
   promptFour: 'Does rating and popularity matter to you?'
 };
+const PROMPT_CLASS_LIST = ['chat-msg', 'chat-msg--left'];
+const PROXY_ADDRESS = 'http://localhost:3000/businesses';
+
+const REPLIES = document.querySelector('.container-chat-replies');
+const REPLY_CLASS_LIST = ['chat-msg', 'chat-msg--right'];
+
+const YES_NO_ANSWERS = ['Yes', 'No'];
+
+let promptNum = 1;
 
 let userPref = [];
 
@@ -73,8 +78,8 @@ function init() {
   const welcomeMsg = 'Welcome to Grub Bot!';
   const promptMsg = PROMPTS.promptOne;
 
-  initMsg.classList.add('chat-msg', 'chat-msg--left');
-  initPrompt.classList.add('chat-msg', 'chat-msg--left');
+  initMsg.classList.add(...PROMPT_CLASS_LIST);
+  initPrompt.classList.add(...PROMPT_CLASS_LIST);
   initMsg.innerHTML = welcomeMsg;
   initPrompt.innerHTML = promptMsg;
 
@@ -83,31 +88,32 @@ function init() {
   // Delay first prompt after the initial message is shown.
   setTimeout(() => {
     CHAT.appendChild(initPrompt);
-    for (let i = 0; i < CUISINES.length; i++) {
-      let btnSet = createBtns(4);
+    for (let i = 0; i < cuisines.length; i++) {
+      const btnSet = createBtns(4);
 
       if (i === 4) {
         btnSet.pop();
       }
 
-      CUISINES[i].btnSet = btnSet;
+      cuisines[i].btnSet = btnSet;
 
-      for (let j = 0; j < CUISINES[i].btnSet.length; j++) {
-        CUISINES[i].btnSet[j].innerHTML = CUISINES[i].cuisineSet[j];
-        CUISINES[i].btnSet[j].addEventListener('click', function () {
-          userPref.push(CUISINES[i].btnSet[j].innerHTML);
-
+      for (let j = 0; j < cuisines[i].btnSet.length; j++) {
+        cuisines[i].btnSet[j].innerHTML = cuisines[i].cuisineSet[j];
+        cuisines[i].btnSet[j].addEventListener('click', () => {
+          userPref.push({ cuisine: cuisines[i].btnSet[j].innerHTML });
           removeBtnRows('.chat-replies');
           const reply = document.createElement('div');
-          reply.classList.add(REPLY_CLASS_LIST[0], REPLY_CLASS_LIST[1]);
-          reply.innerHTML = userPref[0];
+          reply.classList.add(...REPLY_CLASS_LIST);
+          reply.innerHTML = userPref[0].cuisine;
           CHAT.appendChild(reply);
+          // TEST:
+          // showNextPrompt(PROMPTS.promptTwo, PRICE_RANGE, PRICE_RANGE.length, 1);
         });
-        cuisineRow[i].appendChild(CUISINES[i].btnSet[j]);
+        cuisineRow[i].appendChild(cuisines[i].btnSet[j]);
       }
     }
 
-    cuisineRow.forEach((row) => {
+    cuisineRow.forEach(row => {
       REPLIES.appendChild(row);
     });
   }, 750);
@@ -135,11 +141,38 @@ function createBtnRow(numRows) {
   return arr;
 }
 
+// Remove the row(s) of buttons from the chat bot
 function removeBtnRows(elementId) {
   let elements = document.querySelectorAll(elementId);
-  elements.forEach((element) => {
+  elements.forEach(element => {
     element.remove();
   });
+}
+
+// Show the next prompt from the chat bot
+function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
+  const btnSet = createBtns(numBtns);
+  const btnRow = createBtnRow(numBtnRows);
+  const nextPrompt = document.createElement('div');
+
+  setTimeout(() => {
+    nextPrompt.classList.add(...PROMPT_CLASS_LIST);
+    nextPrompt.innerHTML = prompt;
+    CHAT.appendChild(nextPrompt);
+
+    for (let i = 0; i < btnSet.length; i++) {
+      btnSet[i].innerHTML = replies[i];
+      btnSet[i].addEventListener('click', () => {
+        promptNum++;
+
+        // IF: promptNum is equal to 4 (we are on the fourth prompt)
+        // THEN: Show chat bot message: 'Searching for a restaurant...'
+      });
+      btnRow[0].appendChild(btnSet[i]);
+    }
+
+    REPLIES.appendChild(btnRow[0]);
+  }, 750);
 }
 
 // On load and after 750ms, call the initialize function 'init'
