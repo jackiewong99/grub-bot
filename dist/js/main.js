@@ -146,6 +146,10 @@ function removeBtnRows(elementId) {
   });
 }
 
+function scrollChat(message) {
+  CHAT.scrollTop = message.offsetHeight + message.offsetTop;
+}
+
 // Show the next prompt from the chat bot.
 // Recursively call itself to show the next prompt
 function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
@@ -157,6 +161,10 @@ function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
     nextPrompt.classList.add(...PROMPT_CLASS_LIST);
     nextPrompt.innerHTML = prompt;
     CHAT.appendChild(nextPrompt);
+
+    if (prompt === PROMPTS.promptThree || prompt === PROMPTS.promptFour) {
+      scrollChat(nextPrompt);
+    }
 
     for (let i = 0; i < btnSet.length; i++) {
       btnSet[i].innerHTML = replies[i];
@@ -195,6 +203,7 @@ function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
             searchMsg.classList.add(...PROMPT_CLASS_LIST);
             searchMsg.innerHTML = 'Okay, searching for a restaurant...';
             CHAT.appendChild(searchMsg);
+            scrollChat(nextPrompt);
             break;
 
           default:

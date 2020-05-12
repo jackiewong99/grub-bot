@@ -96,7 +96,7 @@ hr {
 
 .container-chat-msg {
   grid-area: messages;
-  overflow: auto; }
+  overflow-y: scroll; }
 
 .chat-msg {
   display: flex;
@@ -135,7 +135,7 @@ hr {
       border-right: 10px solid #6dbbff;
       width: 0;
       height: 0;
-      left: 223px;
+      left: 208px;
       top: 15px;
       transform: rotate(90deg); }
   .chat-msg p {
