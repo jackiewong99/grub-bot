@@ -66,12 +66,10 @@ const REPLY_CLASS_LIST = ['chat-msg', 'chat-msg--right'];
 
 const YES_NO_ANSWERS = ['Yes', 'No'];
 
-let promptNum = 1;
-
 let userPref = [];
 
 // Main function for the chat bot
-function init() {
+function chatBot() {
   const initMsg = document.createElement('div');
   const initPrompt = document.createElement('div');
   const cuisineRow = createBtnRow(5);
@@ -106,8 +104,7 @@ function init() {
           reply.classList.add(...REPLY_CLASS_LIST);
           reply.innerHTML = userPref[0].cuisine;
           CHAT.appendChild(reply);
-          // TEST:
-          // showNextPrompt(PROMPTS.promptTwo, PRICE_RANGE, PRICE_RANGE.length, 1);
+          showNextPrompt(PROMPTS.promptTwo, PRICE_RANGE, PRICE_RANGE.length, 1);
         });
         cuisineRow[i].appendChild(cuisines[i].btnSet[j]);
       }
@@ -149,7 +146,8 @@ function removeBtnRows(elementId) {
   });
 }
 
-// Show the next prompt from the chat bot
+// Show the next prompt from the chat bot.
+// Recursively call itself to show the next prompt
 function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
   const btnSet = createBtns(numBtns);
   const btnRow = createBtnRow(numBtnRows);
@@ -163,10 +161,45 @@ function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
     for (let i = 0; i < btnSet.length; i++) {
       btnSet[i].innerHTML = replies[i];
       btnSet[i].addEventListener('click', () => {
-        promptNum++;
+        const reply = document.createElement('div');
 
-        // IF: promptNum is equal to 4 (we are on the fourth prompt)
-        // THEN: Show chat bot message: 'Searching for a restaurant...'
+        reply.classList.add(...REPLY_CLASS_LIST);
+        reply.innerHTML = btnSet[i].innerHTML;
+        removeBtnRows('.chat-replies');
+        CHAT.appendChild(reply);
+
+        switch (prompt) {
+          case 'How much are you willing to spend?':
+            userPref.push({ budget: btnSet[i].innerHTML });
+            showNextPrompt(
+              PROMPTS.promptThree,
+              YES_NO_ANSWERS,
+              YES_NO_ANSWERS.length,
+              1
+            );
+            break;
+
+          case 'Are you looking for a restaurant nearby?':
+            userPref.push({ prefNearby: btnSet[i].innerHTML });
+            showNextPrompt(
+              PROMPTS.promptFour,
+              YES_NO_ANSWERS,
+              YES_NO_ANSWERS.length,
+              1
+            );
+            break;
+
+          case 'Does rating and popularity matter to you?':
+            userPref.push({ fame: btnSet[i].innerHTML });
+            const searchMsg = document.createElement('div');
+            searchMsg.classList.add(...PROMPT_CLASS_LIST);
+            searchMsg.innerHTML = 'Okay, searching for a restaurant...';
+            CHAT.appendChild(searchMsg);
+            break;
+
+          default:
+            break;
+        }
       });
       btnRow[0].appendChild(btnSet[i]);
     }
@@ -177,5 +210,5 @@ function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
 
 // On load and after 750ms, call the initialize function 'init'
 window.onload = function () {
-  setTimeout(init, 750);
+  setTimeout(chatBot, 750);
 };
