@@ -1,4 +1,4 @@
-// Create buttons for choosing a cuisine for the initial prompt
+// Create reply-buttons for each prompt
 export function createBtns(numBtns) {
   let arr = [];
   for (let i = 0; i < numBtns; i++) {
@@ -10,7 +10,7 @@ export function createBtns(numBtns) {
   return arr;
 }
 
-// Create the row of cuisine buttons for the initial prompt
+// Create the row(s) of buttons for each prompt
 export function createBtnRow(numRows) {
   let arr = [];
   for (let i = 0; i < numRows; i++) {
