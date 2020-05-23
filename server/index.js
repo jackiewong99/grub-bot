@@ -35,8 +35,6 @@ app.get('/businesses/:offset/:latitude/:longitude', (req, res) => {
     .then(response => response.json())
     .then(json => {
       res.json(json);
-      let businesses = json.businesses;
-      console.log(businesses.length);
     });
 });
 
