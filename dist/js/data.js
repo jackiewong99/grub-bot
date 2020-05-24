@@ -39,3 +39,8 @@ export const YES_NO_ANSWERS = ['Yes', 'No'];
 
 export const PROMPT_CLASS_LIST = ['chat-msg', 'chat-msg--left'];
 export const REPLY_CLASS_LIST = ['chat-msg', 'chat-msg--right'];
+
+export const COORDS = {
+  latitude: '',
+  longitude: ''
+};
