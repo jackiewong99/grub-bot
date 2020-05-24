@@ -4,14 +4,14 @@
 
 // All functionality goes in this file temporarily until first version project is finished
 
-// Local Proxy ADDRESS: http://localhost:3000/businesses/offset/latitude/longitude
+// Local Proxy ADDRESS: http://localhost:3000/businesses/latitude/longitude
 
 // *** EXAMPLE: ***
 
 // let resultOffset = 101;
 // let latitude = '21.2869027';
 // let longitude = '-157.7973769';
-// fetch(`${PROXY_ADDRESS}/${resultOffset}/${latitude}/${longitude}`)
+// fetch(`${PROXY_ADDRESS}/${latitude}/${longitude}`)
 //   .then((response) => response.json())
 //   .then((json) => {
 //     let businesses = json.businesses;
@@ -27,7 +27,8 @@ import {
   PROMPTS,
   YES_NO_ANSWERS,
   PROMPT_CLASS_LIST,
-  REPLY_CLASS_LIST
+  REPLY_CLASS_LIST,
+  COORDS
 } from './data.js';
 
 import {
@@ -44,8 +45,6 @@ const REPLIES = document.querySelector('.container-chat-replies');
 
 const userPref = [];
 
-let finishChat = false;
-
 // Main function for the chat bot
 function chatBot() {
   const initMsg = document.createElement('div');
@@ -58,6 +57,18 @@ function chatBot() {
   initPrompt.classList.add(...PROMPT_CLASS_LIST);
   initMsg.innerHTML = welcomeMsg;
   initPrompt.innerHTML = promptMsg;
+
+  if (navigator.geolocation) {
+    let optn = {
+      enableHighAccuracy: true,
+      timeout: Infinity,
+      maximumAge: 0
+    };
+
+    navigator.geolocation.getCurrentPosition(collectPosition, showError, optn);
+  } else {
+    alert('Geolocation not supported in browser.');
+  }
 
   setTimeout(() => {
     CHAT.appendChild(initMsg);
@@ -158,7 +169,9 @@ function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
             searchMsg.innerHTML = 'Okay, searching for a restaurant...';
             CHAT.appendChild(searchMsg);
             autoScrollChat(searchMsg);
-            searchRestaurant();
+            setTimeout(() => {
+              searchRestaurant();
+            }, 1300);
             break;
 
           default:
@@ -172,23 +185,53 @@ function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
   }, 750);
 }
 
-function searchRestaurant() {
-  setTimeout(() => {
-    const chatArea = document.querySelector('.container-chat');
-    // chatArea.style.display = 'none';
-    chatArea.classList.add('hide-chat');
+function collectPosition(position) {
+  COORDS['latitude'] = position.coords.latitude;
+  COORDS['longitude'] = position.coords.longitude;
+}
 
-    const body = document.querySelector('.home-view');
-    const loader = document.createElement('div');
-    loader.classList.add('loader');
+function showError(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      alert(
+        'You have denied the request to share your location. Searching may not function properly.'
+      );
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert('Location information is unavailable.');
+      break;
+    case error.TIMEOUT:
+      alert('Request for your location has timed out.');
+      break;
+    case error.UNKNOWN_ERROR:
+      alert('An unknown error has occurred.');
+      break;
+  }
+}
 
-    const spans = createLoaderSpans();
-    for (const span of spans) {
-      loader.appendChild(span);
-    }
+async function searchRestaurant() {
+  const chatArea = document.querySelector('.container-chat');
+  // chatArea.style.display = 'none';
+  chatArea.classList.add('hide-chat');
 
-    body.appendChild(loader);
-  }, 750);
+  const body = document.querySelector('.home-view');
+  const loader = document.createElement('div');
+  loader.classList.add('loader');
+
+  const spans = createLoaderSpans();
+  for (const span of spans) {
+    loader.appendChild(span);
+  }
+
+  body.appendChild(loader);
+
+  const res = await fetch(
+    `${PROXY_ADDRESS}/${COORDS.latitude}/${COORDS.longitude}`
+  );
+
+  const results = await res.json();
+
+  console.log(results.businesses[0].distance);
 }
 
 chatBot();
