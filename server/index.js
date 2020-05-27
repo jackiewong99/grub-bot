@@ -23,8 +23,6 @@ let requestOptions = {
   redirect: 'follow'
 };
 
-// let coordinates = '&latitude=21.2869027&longitude=-157.7973769';
-
 // Routes
 
 app.get('/businesses/:offset/:latitude/:longitude', (req, res) => {
