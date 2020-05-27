@@ -1,26 +1,5 @@
-// ************************************************************************************************************************
+// Local Proxy ADDRESS: http://localhost:3000/businesses/offset/latitude/longitude
 
-// Test fetching data from Yelp API
-
-// All functionality goes in this file temporarily until first version project is finished
-
-// Local Proxy ADDRESS: http://localhost:3000/businesses/latitude/longitude
-
-// *** EXAMPLE: ***
-
-// let resultOffset = 101;
-// let latitude = '21.2869027';
-// let longitude = '-157.7973769';
-// fetch(`${PROXY_ADDRESS}/${latitude}/${longitude}`)
-//   .then((response) => response.json())
-//   .then((json) => {
-//     let businesses = json.businesses;
-//     console.log(businesses);
-//   });
-
-// ****************
-
-// ************************************************************************************************************************
 import {
   CUISINES,
   PRICE_RANGE,
@@ -38,11 +17,21 @@ import {
   createLoaderSpans
 } from './elements.js';
 
+import {
+  filterCuisine,
+  filterBudget,
+  filterDistance,
+  filterFame,
+  checkPreferences
+} from './filterPref.js';
+
+const OFFSET_MAX_VAL = 1000;
 const PROXY_ADDRESS = 'http://localhost:3000/businesses';
 
 const CHAT = document.querySelector('.container-chat-msg');
 const REPLIES = document.querySelector('.container-chat-replies');
 
+const searchResult = [];
 const userPref = [];
 
 // Main function for the chat bot
@@ -78,9 +67,9 @@ function chatBot() {
       for (let i = 0; i < CUISINES.length; i++) {
         const btnSet = createBtns(4);
 
-        if (i === 4) {
-          btnSet.pop();
-        }
+        // if (i === 4) {
+        //   btnSet.pop();
+        // }
 
         CUISINES[i].btnSet = btnSet;
 
@@ -225,13 +214,77 @@ async function searchRestaurant() {
 
   body.appendChild(loader);
 
-  const res = await fetch(
-    `${PROXY_ADDRESS}/${COORDS.latitude}/${COORDS.longitude}`
+  // Loop in for loop, while iterator is less than 1050:
+  // Fetch with offset at 0
+  // Push results into an array
+  // Add 50 to iterator
+  for (let i = 0; i <= OFFSET_MAX_VAL; i += 50) {
+    const offset = i;
+
+    const res = await fetch(
+      `${PROXY_ADDRESS}/${offset}/${COORDS.latitude}/${COORDS.longitude}`
+    );
+
+    const results = await res.json();
+
+    searchResult.push(results);
+
+    if (results.businesses.length === 0) {
+      searchResult.pop();
+      break;
+    }
+  }
+
+  // Show text: 'Serving up a restaurant very shortly!' with loading animation
+
+  // After searching
+  // Await a function to resolve a filtered array
+  // Make a main async function for filtering
+  // Make sub functions for filtering each user preference (4 step process)
+  const filteredRes = await filterResults(searchResult);
+
+  // Then call a async function to pick a random object from filtered array and await it
+
+  // Remove loader animation before displaying restaurant data
+  loader.remove();
+
+  // Then animate the displaying of the restaurant
+  console.log(filteredRes);
+}
+
+async function filterResults(results) {
+  // Merge arrays in 'searchResult' array into one array
+  const mergedResults = [];
+
+  results.forEach(result => {
+    result.businesses.forEach(business => {
+      mergedResults.push(business);
+    });
+  });
+
+  // Filter for cuisine
+  const cuisinePref = await filterCuisine(mergedResults);
+
+  // Filter for budget
+  const budgetPref = await filterBudget(cuisinePref);
+
+  // Filter for distance and or fame, and return filtered list based on user preferences.
+  const distPref = await filterDistance(budgetPref);
+  const famePref = await filterFame(distPref);
+  const famePrefOnly = await filterFame(budgetPref);
+  const finalFilter = await checkPreferences(
+    budgetPref,
+    distPref,
+    famePref,
+    famePrefOnly
   );
 
-  const results = await res.json();
+  return finalFilter;
+}
 
-  console.log(results.businesses[0].distance);
+async function randomizeRestaurant(results) {
+  // Generate a random integer between 0 and results.length - 1
+  // Return object at index of randomly generated integer
 }
 
 chatBot();
