@@ -17,13 +17,13 @@ import {
   createLoaderSpans
 } from './elements.js';
 
-import {
-  filterCuisine,
-  filterBudget,
-  filterDistance,
-  filterFame,
-  checkPreferences
-} from './filterPref.js';
+// import {
+//   filterCuisine,
+//   filterBudget,
+//   filterDistance,
+//   filterFame,
+//   checkPreferences
+// } from './filterPref.js';
 
 const OFFSET_MAX_VAL = 1000;
 const PROXY_ADDRESS = 'http://localhost:3000/businesses';
@@ -244,12 +244,14 @@ async function searchRestaurant() {
   const filteredRes = await filterResults(searchResult);
 
   // Then call a async function to pick a random object from filtered array and await it
+  const randomRes = await randomizeRestaurant(filteredRes);
 
   // Remove loader animation before displaying restaurant data
   loader.remove();
 
   // Then animate the displaying of the restaurant
   console.log(filteredRes);
+  console.log(randomRes);
 }
 
 async function filterResults(results) {
@@ -282,9 +284,82 @@ async function filterResults(results) {
   return finalFilter;
 }
 
+// Filter for user's cuisine preference
+async function filterCuisine(results) {
+  const cuisinePref = [];
+
+  results.forEach(result => {
+    result.categories.forEach(category => {
+      if (category.title === userPref[0].cuisine) {
+        cuisinePref.push(result);
+      }
+    });
+  });
+
+  return cuisinePref;
+}
+
+// Filter for user's budget preference
+async function filterBudget(results) {
+  const budgetPref = results.filter(
+    result => result.price === userPref[1].budget
+  );
+
+  return budgetPref;
+}
+
+// Filter for nearby restaurants (within 2 miles)
+async function filterDistance(results) {
+  const distPref = results.filter(result => result.distance <= 3218.69);
+
+  return distPref;
+}
+
+// Filter for high review count and rating
+async function filterFame(results) {
+  const reviews = results.filter(result => result.review_count > 1000);
+  const rating = reviews.filter(business => business.rating >= 3.5);
+
+  return rating;
+}
+
+/*
+Final check for user's combination of answers for 
+preferring a nearby restaurant and if
+they prefer high review count and rating
+*/
+async function checkPreferences(budgetPref, distPref, famePref, famePrefOnly) {
+  const finalFilter = [];
+  if (userPref[2].prefNearby === 'Yes' && userPref[3].fame === 'Yes') {
+    famePref.forEach(business => {
+      finalFilter.push(business);
+    });
+  } else if (userPref[2].prefNearby === 'Yes' && userPref[3].fame === 'No') {
+    distPref.forEach(business => {
+      finalFilter.push(business);
+    });
+  } else if (userPref[2].prefNearby === 'No' && userPref[3].fame === 'Yes') {
+    famePrefOnly.forEach(business => {
+      finalFilter.push(business);
+    });
+  } else if (userPref[2].prefNearby === 'No' && userPref[3].fame === 'No') {
+    budgetPref.forEach(business => {
+      finalFilter.push(business);
+    });
+  }
+
+  return finalFilter;
+}
+
 async function randomizeRestaurant(results) {
   // Generate a random integer between 0 and results.length - 1
+  const min = Math.ceil(0);
+  const max = Math.floor(results.length);
+
+  const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
   // Return object at index of randomly generated integer
+  return results[randomNum];
 }
 
 chatBot();
