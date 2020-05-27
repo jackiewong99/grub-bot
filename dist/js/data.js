@@ -6,22 +6,22 @@ export const CUISINES = [
   },
   {
     set: '2',
-    cuisineSet: ['French', 'Greek', 'Hawaiian', 'Indian'],
+    cuisineSet: ['Filipino', 'French', 'Greek', 'Hawaiian'],
     btnSet: []
   },
   {
     set: '3',
-    cuisineSet: ['Italian', 'Japanese', 'Korean', 'Mediterranean'],
+    cuisineSet: ['Indian', 'Italian', 'Japanese', 'Korean'],
     btnSet: []
   },
   {
     set: '4',
-    cuisineSet: ['Mexican', 'Middle Eastern', 'Moroccan', 'Spanish'],
+    cuisineSet: ['Mediterranean', 'Mexican', 'Middle Eastern', 'Moroccan'],
     btnSet: []
   },
   {
     set: '5',
-    cuisineSet: ['Taiwanese', 'Thai', 'Vegan', 'Vegetarian'],
+    cuisineSet: ['Spanish', 'Taiwanese', 'Thai', 'Vegan', 'Vegetarian'],
     btnSet: []
   }
 ];
