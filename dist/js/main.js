@@ -290,7 +290,7 @@ async function filterResults(results) {
 async function randomizeRestaurant(results) {
   // Generate a random integer between 0 and results.length - 1
   const min = Math.ceil(0);
-  const max = Math.floor(results.length);
+  const max = Math.floor(results.length - 1);
 
   const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
