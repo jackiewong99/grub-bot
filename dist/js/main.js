@@ -14,7 +14,8 @@ import {
   createBtns,
   createBtnRow,
   removeBtnRows,
-  createLoaderSpans
+  createLoaderSpans,
+  showRestaurant
 } from './elements.js';
 
 import {
@@ -253,6 +254,7 @@ async function searchRestaurant() {
 
   // Then animate the displaying of the restaurant
   // And display restaurant
+  showRestaurant(randomRes);
   console.log(filteredRes);
   console.log(randomRes);
 }
@@ -297,84 +299,6 @@ async function randomizeRestaurant(results) {
 
   // Return object at index of randomly generated integer
   return results[randomNum];
-}
-
-function showRestaurant(restaurant) {
-  // Create overal 'div' container to hold the restaurant's information
-  const resCard = document.createElement('div');
-  resCard.classList.add('card');
-
-  // Create 'div' container to hold restaurant's name and image
-  const resHeader = document.createElement('div');
-  const resName = document.createElement('h3');
-  resName.innerHTML = restaurant.name;
-
-  const resImg = document.createElement('img');
-  resImg.src = restaurant.image_url;
-
-  resHeader.appendChild(resName);
-  resHeader.appendChild(resImg);
-
-  // Create 'div' container to hold categories of restaurant
-  const categoryContainer = document.createElement('div');
-  const categories = restaurant.categories;
-  categories.forEach(category => {
-    const categoryName = document.createElement('h5');
-    categoryName.innerHTML = category.title;
-    categoryContainer.appendChild(categoryName);
-  });
-  categoryContainer.classList.add('categories');
-
-  // Create 'div' container to hold restaurant's rating
-  // Show rating icon based on restaurant's rating
-  const priceContainer = document.createElement('div');
-  const price = document.createElement('p');
-  price.innerHTML = restaurant.price;
-  priceContainer.classList.add('price');
-  priceContainer.appendChild(price);
-
-  // Create 'div' container to hold restaurant's open status
-  const openStatus = document.createElement('div');
-  if (restaurant.is_closed === false) {
-    openStatus.innerHtml = 'Open';
-    openStatus.classList.remove('status-closed');
-    openStatus.classList.add('status-open');
-  } else {
-    openStatus.innerHTML = 'Closed';
-    openStatus.classList.remove('status-open');
-    openStatus.classList.add('status-closed');
-  }
-
-  // Create 'div' container to hold user's distance to the restaurant
-  const distance = restaurant.distance / 1609.344;
-  const distanceText = document.createElement('div');
-  distanceText.innerHTML = `${distance} miles away.`;
-  distanceText.classList.add('distance');
-
-  // Create 'div' container to hold restaurant's phone number
-  const phoneNumContainer = document.createElement('div');
-  const phoneNum = document.createElement('p');
-  // ** Phone number may or may not be formatted **
-  phoneNum.innerHTML = restaurant.display_phone;
-  phoneNumContainer.classList.add('phone');
-  phoneNumContainer.appendChild(phoneNum);
-
-  // Create 'div' container to hold restaurant's address
-  const addressContainer = document.createElement('div');
-  const address = restaurant.location.display_address;
-  address.forEach(element => {
-    const addressElement = document.createElement('h5');
-    addressElement.innerHTML = element;
-    addressContainer.appendChild(addressElement);
-  });
-  addressContainer.classList.add('address');
-
-  resCard.appendChild(resHeader);
-  resCard.appendChild(categoryContainer);
-  resCard.appendChild(priceContainer);
-  resCard.appendChild(openStatus);
-  resCard.appendChild(distanceText);
-  resCard.appendChild(phoneNumContainer);
 }
 
 chatBot();
