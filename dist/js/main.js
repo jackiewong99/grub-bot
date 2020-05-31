@@ -255,8 +255,6 @@ async function searchRestaurant() {
   // Then animate the displaying of the restaurant
   // And display restaurant
   showRestaurant(randomRes);
-  console.log(filteredRes);
-  console.log(randomRes);
 }
 
 async function filterResults(results) {
