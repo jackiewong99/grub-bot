@@ -192,3 +192,15 @@ hr {
   to {
     transform: translate3d(0, -30px, 0);
     background-color: #ffb997; } }
+
+.card {
+  grid-area: chatbot;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 0px 30px black;
+  border-radius: 10px; }
+  .card-img {
+    height: 250px;
+    width: 250px; }

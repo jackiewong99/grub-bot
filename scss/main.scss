@@ -271,3 +271,20 @@ hr {
     background-color: rgb(255, 185, 151);
   }
 }
+
+// Restaurant Card
+
+.card {
+  grid-area: chatbot;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
+  box-shadow: 0px 0px 30px $black;
+  border-radius: 10px;
+
+  &-img {
+    height: 250px;
+    width: 250px;
+  }
+}
