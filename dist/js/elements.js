@@ -58,6 +58,7 @@ export function showRestaurant(restaurant) {
 
   const resImg = document.createElement('img');
   resImg.src = restaurant.image_url;
+  resImg.classList.add('card-img');
 
   resHeader.appendChild(resName);
   resHeader.appendChild(resImg);
@@ -80,6 +81,11 @@ export function showRestaurant(restaurant) {
   priceContainer.classList.add('price');
   priceContainer.appendChild(price);
 
+  // Create 'div' container to hold restaurant's rating
+  const rating = document.createElement('div');
+  rating.innerHTML = restaurant.rating;
+  rating.classList.add('rating');
+
   // Create 'div' container to hold restaurant's open status
   const openStatus = document.createElement('div');
   if (restaurant.is_closed === false) {
@@ -93,9 +99,14 @@ export function showRestaurant(restaurant) {
   }
 
   // Create 'div' container to hold user's distance to the restaurant
-  const distance = restaurant.distance / 1609.344;
+  const getDistance = restaurant.distance / 1609.344;
+  const distance = Math.round(getDistance * 10) / 10;
   const distanceText = document.createElement('div');
-  distanceText.innerHTML = `${distance} miles away.`;
+  if (distance < 1 || distance > 1) {
+    distanceText.innerHTML = `${distance} miles away.`;
+  } else {
+    distanceText.innerHTML = `${distance} mile away.`;
+  }
   distanceText.classList.add('distance');
 
   // Create 'div' container to hold restaurant's phone number
@@ -121,7 +132,11 @@ export function showRestaurant(restaurant) {
   resCard.appendChild(resHeader);
   resCard.appendChild(categoryContainer);
   resCard.appendChild(priceContainer);
+  resCard.appendChild(rating);
   resCard.appendChild(openStatus);
   resCard.appendChild(distanceText);
   resCard.appendChild(phoneNumContainer);
+
+  const body = document.querySelector('.home-view');
+  body.appendChild(resCard);
 }
