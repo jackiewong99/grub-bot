@@ -240,8 +240,6 @@ async function searchRestaurant() {
     }
   }
 
-  // Show text: 'Serving up a restaurant very shortly!' with loading animation
-
   // After searching
   // Await a function to resolve a filtered array
   // Make a main async function for filtering
