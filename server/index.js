@@ -25,10 +25,11 @@ let requestOptions = {
 
 // Routes
 
-app.get('/businesses/:offset/:latitude/:longitude', (req, res) => {
-  let coordinates = `&latitude=${req.params.latitude}&longitude=${req.params.longitude}`;
-  let resultOffset = `&offset=${req.params.offset}`; // PLAN: Keep fetching and iterate the offset up to 1000 (maximum number of results from Yelp API)
-  const API_ADDRESS = `https://api.yelp.com/v3/businesses/search?limit=50${coordinates}${resultOffset}`;
+app.get('/businesses/:category/:offset/:latitude/:longitude', (req, res) => {
+  const category = `categories=${req.params.category}`;
+  const coordinates = `&latitude=${req.params.latitude}&longitude=${req.params.longitude}`;
+  const resultOffset = `&offset=${req.params.offset}`;
+  const API_ADDRESS = `https://api.yelp.com/v3/businesses/search?${category}&limit=50${coordinates}${resultOffset}`;
   fetch(API_ADDRESS, requestOptions)
     .then(response => response.json())
     .then(json => {

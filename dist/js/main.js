@@ -19,7 +19,6 @@ import {
 } from './elements.js';
 
 import {
-  filterCuisine,
   filterBudget,
   filterDistance,
   filterFame,
@@ -203,6 +202,7 @@ function showError(error) {
 
 async function searchRestaurant() {
   const chatArea = document.querySelector('.container-chat');
+  // TEST:
   // chatArea.style.display = 'none';
   chatArea.classList.add('hide-chat');
 
@@ -221,11 +221,13 @@ async function searchRestaurant() {
   // Fetch with offset at 0
   // Push results into an array
   // Add 50 to iterator
-  for (let i = 0; i <= OFFSET_MAX_VAL; i += 50) {
+  for (let i = 0; i < OFFSET_MAX_VAL; i += 50) {
     const offset = i;
+    const cuisine = userPref[0].cuisine;
+    const category = cuisine.toLowerCase();
 
     const res = await fetch(
-      `${PROXY_ADDRESS}/${offset}/${COORDS.latitude}/${COORDS.longitude}`
+      `${PROXY_ADDRESS}/${category}/${offset}/${COORDS.latitude}/${COORDS.longitude}`
     );
 
     const results = await res.json();
@@ -254,6 +256,8 @@ async function searchRestaurant() {
 
   // Then animate the displaying of the restaurant
   // And display restaurant
+  console.log(filteredRes);
+  console.log(randomRes);
   showRestaurant(randomRes);
 }
 
@@ -267,11 +271,8 @@ async function filterResults(results) {
     });
   });
 
-  // Filter for cuisine
-  const cuisinePref = await filterCuisine(mergedResults, userPref);
-
   // Filter for budget
-  const budgetPref = await filterBudget(cuisinePref, userPref);
+  const budgetPref = await filterBudget(mergedResults, userPref);
 
   // Filter for distanceText and or fame, and return filtered list based on user preferences.
   const distPref = await filterDistance(budgetPref);

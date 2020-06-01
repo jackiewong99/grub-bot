@@ -1,18 +1,3 @@
-// Filter for user's cuisine preference
-export async function filterCuisine(results, userPref) {
-  const cuisinePref = [];
-
-  results.forEach(result => {
-    result.categories.forEach(category => {
-      if (category.title === userPref[0].cuisine) {
-        cuisinePref.push(result);
-      }
-    });
-  });
-
-  return cuisinePref;
-}
-
 // Filter for user's budget preference
 export async function filterBudget(results, userPref) {
   const budgetPref = results.filter(
@@ -31,7 +16,7 @@ export async function filterDistance(results) {
 
 // Filter for high review count and rating
 export async function filterFame(results) {
-  const reviews = results.filter(result => result.review_count > 1000);
+  const reviews = results.filter(result => result.review_count > 150);
   const rating = reviews.filter(business => business.rating >= 3.5);
 
   return rating;
