@@ -71,6 +71,10 @@ export function showRestaurant(restaurant) {
   // Create 'div' container to hold categories of restaurant
   const categoryContainer = document.createElement('div');
   const categories = restaurant.categories;
+  const categoryHeader = document.createElement('span');
+  categoryHeader.innerHTML = 'Categories:';
+  categoryHeader.classList.add('card-categories-header');
+  categoryContainer.appendChild(categoryHeader);
 
   if (categories.length === 1) {
     const categoryItem = document.createElement('span');
@@ -83,7 +87,6 @@ export function showRestaurant(restaurant) {
     for (let i = 0; i < categories.length; i++) {
       const categoryItem = document.createElement('span');
       const categoryName = document.createElement('p');
-      categoryName.style.paddingLeft = '10px';
       if (i === categories.length - 1) {
         categoryName.innerHTML = categories[i].title;
       } else {
