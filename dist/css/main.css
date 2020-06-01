@@ -206,7 +206,7 @@ hr {
   grid-template-rows: 20% 80%;
   grid-template-areas: 'name .' 'img info';
   background-color: white;
-  box-shadow: 0px 0px 20px black;
+  box-shadow: 0px 0px 20px rgba(53, 53, 53, 0.918);
   border-radius: 10px;
   height: 50%;
   width: 80%; }
@@ -217,7 +217,8 @@ hr {
     align-items: center; }
   .card-img {
     height: 90%;
-    width: 90%; }
+    width: 90%;
+    border-radius: 10px; }
     .card-img-container {
       grid-area: img;
       display: flex;
@@ -230,10 +231,15 @@ hr {
     justify-content: center;
     align-items: center; }
   .card-categories {
-    font-size: 14px; }
+    font-size: 12px;
+    padding-left: 7px; }
     .card-categories-container {
       display: flex;
-      justify-content: center; }
+      justify-content: center;
+      align-items: center; }
+    .card-categories-header {
+      font-size: 12px;
+      font-weight: 700; }
   .card-address {
     margin: 2px 0; }
     .card-address-container {
