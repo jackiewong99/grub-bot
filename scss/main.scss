@@ -57,6 +57,7 @@ hr {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .search-bar {
@@ -274,17 +275,70 @@ hr {
 
 // Restaurant Card
 
-.card {
+.container-card {
   grid-area: chatbot;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 20% 80%;
+  grid-template-areas:
+    'name .'
+    'img info';
   background-color: $white;
   box-shadow: 0px 0px 30px $black;
   border-radius: 10px;
+  height: 50%;
+  width: 80%;
+
+  &-name {
+    grid-area: name;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &-img {
-    height: 250px;
-    width: 250px;
+    height: 90%;
+    width: 90%;
+
+    &-container {
+      grid-area: img;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &-info {
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-categories {
+    font-size: 14px;
+
+    &-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &-price {
+  }
+
+  &-address {
+    margin: 2px 0;
+
+    &-container {
+      line-height: normal;
+    }
   }
 }
