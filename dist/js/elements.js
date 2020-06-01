@@ -48,55 +48,66 @@ export function createLoaderSpans() {
 // Display the randomly chosen restaurant to the user
 export function showRestaurant(restaurant) {
   // Create overal 'div' container to hold the restaurant's information
+  const cardContainer = document.createElement('div');
+  cardContainer.classList.add('container-card');
   const resCard = document.createElement('div');
   resCard.classList.add('card');
 
-  // Create 'div' container to hold restaurant's name and image
+  // Create 'div' container to hold restaurant's name
   const resHeader = document.createElement('div');
-  const resName = document.createElement('h3');
+  const resName = document.createElement('h2');
   resName.innerHTML = restaurant.name;
+  resHeader.classList.add('card-name');
+  resHeader.appendChild(resName);
 
+  // Create 'div' container to hold restaurant's image
+  const imgContainer = document.createElement('div');
   const resImg = document.createElement('img');
   resImg.src = restaurant.image_url;
   resImg.classList.add('card-img');
-
-  resHeader.appendChild(resName);
-  resHeader.appendChild(resImg);
+  imgContainer.classList.add('card-img-container');
+  imgContainer.appendChild(resImg);
 
   // Create 'div' container to hold categories of restaurant
   const categoryContainer = document.createElement('div');
   const categories = restaurant.categories;
-  categories.forEach(category => {
-    const categoryName = document.createElement('h5');
-    categoryName.innerHTML = category.title;
-    categoryContainer.appendChild(categoryName);
-  });
-  categoryContainer.classList.add('categories');
+
+  if (categories.length === 1) {
+    const categoryItem = document.createElement('span');
+    const categoryName = document.createElement('p');
+    categoryName.innerHTML = categories[0].title;
+    categoryName.classList.add('card-categories');
+    categoryItem.appendChild(categoryName);
+    categoryContainer.appendChild(categoryItem);
+  } else {
+    for (let i = 0; i < categories.length; i++) {
+      const categoryItem = document.createElement('span');
+      const categoryName = document.createElement('p');
+      categoryName.style.paddingLeft = '10px';
+      if (i === categories.length - 1) {
+        categoryName.innerHTML = categories[i].title;
+      } else {
+        categoryName.innerHTML = categories[i].title + ',';
+      }
+      categoryName.classList.add('card-categories');
+      categoryItem.appendChild(categoryName);
+      categoryContainer.appendChild(categoryItem);
+    }
+  }
+  categoryContainer.classList.add('card-categories-container');
 
   // Create 'div' container to hold restaurant's rating
   // Show rating icon based on restaurant's rating
   const priceContainer = document.createElement('div');
   const price = document.createElement('p');
   price.innerHTML = restaurant.price;
-  priceContainer.classList.add('price');
+  priceContainer.classList.add('card-price');
   priceContainer.appendChild(price);
 
   // Create 'div' container to hold restaurant's rating
   const rating = document.createElement('div');
   rating.innerHTML = restaurant.rating;
-  rating.classList.add('rating');
-
-  // Create 'div' container to hold restaurant's open status
-  const openStatus = document.createElement('div');
-  if (restaurant.is_closed === false) {
-    openStatus.innerHtml = 'Open';
-    openStatus.classList.remove('status-closed');
-    openStatus.classList.add('status-open');
-  } else {
-    openStatus.innerHTML = 'Closed';
-    openStatus.classList.remove('status-open');
-    openStatus.classList.add('status-closed');
-  }
+  rating.classList.add('card-rating');
 
   // Create 'div' container to hold user's distance to the restaurant
   const getDistance = restaurant.distance / 1609.344;
@@ -107,14 +118,14 @@ export function showRestaurant(restaurant) {
   } else {
     distanceText.innerHTML = `${distance} mile away.`;
   }
-  distanceText.classList.add('distance');
+  distanceText.classList.add('card-distance');
 
   // Create 'div' container to hold restaurant's phone number
   const phoneNumContainer = document.createElement('div');
   const phoneNum = document.createElement('p');
   // ** Phone number may or may not be formatted **
   phoneNum.innerHTML = restaurant.display_phone;
-  phoneNumContainer.classList.add('phone');
+  phoneNumContainer.classList.add('card-phone');
   phoneNumContainer.appendChild(phoneNum);
 
   // Create 'div' container to hold restaurant's address
@@ -123,20 +134,28 @@ export function showRestaurant(restaurant) {
   address.forEach(element => {
     const addressElement = document.createElement('h5');
     addressElement.innerHTML = element;
+    addressElement.classList.add('card-address');
     addressContainer.appendChild(addressElement);
   });
-  addressContainer.classList.add('address');
+  addressContainer.classList.add('card-address-container');
 
-  // Append all restaurant information elements to the main
+  // Create 'div' container to hold all restaurant information
+  const infoContainer = document.createElement('div');
+  infoContainer.classList.add('card-info');
+  infoContainer.appendChild(categoryContainer);
+  infoContainer.appendChild(priceContainer);
+  infoContainer.appendChild(rating);
+  infoContainer.appendChild(distanceText);
+  infoContainer.appendChild(addressContainer);
+  infoContainer.appendChild(phoneNumContainer);
+
+  // Append all restaurant elements to the main
   // Restaurant card container
   resCard.appendChild(resHeader);
-  resCard.appendChild(categoryContainer);
-  resCard.appendChild(priceContainer);
-  resCard.appendChild(rating);
-  resCard.appendChild(openStatus);
-  resCard.appendChild(distanceText);
-  resCard.appendChild(phoneNumContainer);
+  resCard.appendChild(imgContainer);
+  resCard.appendChild(infoContainer);
+  cardContainer.appendChild(resCard);
 
   const body = document.querySelector('.home-view');
-  body.appendChild(resCard);
+  body.appendChild(cardContainer);
 }
