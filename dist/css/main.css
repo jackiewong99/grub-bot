@@ -26,35 +26,6 @@ hr {
   flex-direction: row;
   justify-content: center; }
 
-.search-section {
-  grid-area: searchbar;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; }
-
-.search-bar {
-  background: white;
-  width: 80%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  border-radius: 25px; }
-  .search-bar .search-text {
-    border: none;
-    border-radius: 25px;
-    width: 100%;
-    height: 100px;
-    font-size: 2rem;
-    padding: 15px; }
-    .search-bar .search-text::placeholder {
-      font-size: 2rem;
-      color: #d6d6d6; }
-    .search-bar .search-text:focus {
-      outline: none;
-      box-shadow: 0px 0px 15px #ffba97; }
-
 .about-popup {
   grid-area: about;
   display: flex;
@@ -255,18 +226,10 @@ hr {
     .card-price-header {
       font-size: 12px;
       font-weight: 700; }
-  .card-rating {
-    font-size: 12px;
-    padding-left: 7px; }
-    .card-rating:nth-child(3) {
-      padding-left: 3px; }
-    .card-rating-container {
-      display: flex;
-      justify-content: center;
-      align-items: center; }
-    .card-rating-header {
-      font-size: 12px;
-      font-weight: 700; }
+  .card-rating-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
   .card-distance {
     font-size: 12px;
     padding-left: 7px; }
