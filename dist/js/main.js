@@ -224,19 +224,53 @@ async function searchRestaurant() {
   for (let i = 0; i < OFFSET_MAX_VAL; i += 50) {
     const offset = i;
     const cuisine = userPref[0].cuisine;
-    const category = cuisine.toLowerCase();
+    let category = cuisine.toLowerCase();
 
-    const res = await fetch(
-      `${PROXY_ADDRESS}/${category}/${offset}/${COORDS.latitude}/${COORDS.longitude}`
-    );
+    if (category === 'middle eastern') {
+      category = 'mideastern';
+    } else {
+      category = category.replace(/\s+/g, '');
+    }
 
-    const results = await res.json();
+    if (category === 'american') {
+      for (let j = 0; j < 2; j++) {
+        let newCategory;
+        switch (i) {
+          case 0:
+            newCategory = 'newamerican';
+            break;
 
-    searchResult.push(results);
+          case 1:
+            newCategory = 'tradamerican';
+            break;
+        }
 
-    if (results.businesses.length === 0) {
-      searchResult.pop();
-      break;
+        const res = await fetch(
+          `${PROXY_ADDRESS}/${newCategory}/${offset}/${COORDS.latitude}/${COORDS.longitude}`
+        );
+
+        const results = await res.json();
+
+        searchResult.push(results);
+
+        if (results.businesses.length === 0) {
+          searchResult.pop();
+          break;
+        }
+      }
+    } else {
+      const res = await fetch(
+        `${PROXY_ADDRESS}/${category}/${offset}/${COORDS.latitude}/${COORDS.longitude}`
+      );
+
+      const results = await res.json();
+
+      searchResult.push(results);
+
+      if (results.businesses.length === 0) {
+        searchResult.pop();
+        break;
+      }
     }
   }
 
@@ -254,8 +288,6 @@ async function searchRestaurant() {
 
   // Then animate the displaying of the restaurant
   // And display restaurant
-  console.log(filteredRes);
-  console.log(randomRes);
   showRestaurant(randomRes);
 }
 
