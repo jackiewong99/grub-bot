@@ -211,10 +211,15 @@ hr {
   height: 50%;
   width: 80%; }
   .card-name {
-    grid-area: name;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
+    font-size: 1.5em;
+    font-weight: 700;
+    text-decoration: none;
+    color: black; }
+    .card-name-container {
+      grid-area: name;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
   .card-img {
     height: 90%;
     width: 90%;
@@ -240,7 +245,65 @@ hr {
     .card-categories-header {
       font-size: 12px;
       font-weight: 700; }
+  .card-price {
+    font-size: 12px;
+    padding-left: 7px; }
+    .card-price-container {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .card-price-header {
+      font-size: 12px;
+      font-weight: 700; }
+  .card-rating {
+    font-size: 12px;
+    padding-left: 7px; }
+    .card-rating:nth-child(3) {
+      padding-left: 3px; }
+    .card-rating-container {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .card-rating-header {
+      font-size: 12px;
+      font-weight: 700; }
+  .card-distance {
+    font-size: 12px;
+    padding-left: 7px; }
+    .card-distance-container {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .card-distance-header {
+      font-size: 12px;
+      font-weight: 700; }
   .card-address {
-    margin: 2px 0; }
+    font-size: 12px;
+    margin: 2px 0;
+    padding-left: 7px; }
     .card-address-container {
-      line-height: normal; }
+      line-height: normal;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .card-address-header {
+      font-size: 12px;
+      font-weight: 700; }
+  .card-phone {
+    font-size: 12px;
+    padding-left: 7px; }
+    .card-phone-container {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .card-phone-header {
+      font-size: 12px;
+      font-weight: 700; }
+  .card-ref {
+    font-size: 12px;
+    text-decoration: none;
+    color: black; }
+    .card-ref-container {
+      display: flex;
+      justify-content: center;
+      align-items: center; }

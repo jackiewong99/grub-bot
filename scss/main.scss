@@ -296,10 +296,17 @@ hr {
   width: 80%;
 
   &-name {
-    grid-area: name;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-decoration: none;
+    color: $black;
+
+    &-container {
+      grid-area: name;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   &-img {
@@ -340,13 +347,100 @@ hr {
   }
 
   &-price {
+    font-size: 12px;
+    padding-left: 7px;
+
+    &-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-header {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+
+  &-rating {
+    font-size: 12px;
+    padding-left: 7px;
+
+    &:nth-child(3) {
+      padding-left: 3px;
+    }
+
+    &-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-header {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+
+  &-distance {
+    font-size: 12px;
+    padding-left: 7px;
+
+    &-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-header {
+      font-size: 12px;
+      font-weight: 700;
+    }
   }
 
   &-address {
+    font-size: 12px;
     margin: 2px 0;
+    padding-left: 7px;
 
     &-container {
       line-height: normal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-header {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+
+  &-phone {
+    font-size: 12px;
+    padding-left: 7px;
+
+    &-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-header {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+
+  &-ref {
+    font-size: 12px;
+    text-decoration: none;
+    color: $black;
+
+    &-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
