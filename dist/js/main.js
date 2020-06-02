@@ -228,6 +228,8 @@ async function searchRestaurant() {
 
     if (category === 'middle eastern') {
       category = 'mideastern';
+    } else if (category === 'indian') {
+      category = 'indpak';
     } else {
       category = category.replace(/\s+/g, '');
     }
