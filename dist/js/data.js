@@ -21,7 +21,7 @@ export const CUISINES = [
   },
   {
     set: '5',
-    cuisineSet: ['Spanish', 'Taiwanese', 'Thai', 'Vegan', 'Vegetarian'],
+    cuisineSet: ['Spanish', 'Taiwanese', 'Thai', 'Vegan', 'Vietnamese'],
     btnSet: []
   }
 ];
