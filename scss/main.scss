@@ -301,6 +301,7 @@ hr {
     font-weight: 700;
     text-decoration: none;
     color: $black;
+    text-align: center;
 
     &-container {
       grid-area: name;
@@ -334,6 +335,7 @@ hr {
   &-categories {
     font-size: 12px;
     padding-left: 7px;
+    text-align: center;
 
     &-container {
       display: flex;

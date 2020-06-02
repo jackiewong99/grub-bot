@@ -185,7 +185,8 @@ hr {
     font-size: 1.5em;
     font-weight: 700;
     text-decoration: none;
-    color: black; }
+    color: black;
+    text-align: center; }
     .card-name-container {
       grid-area: name;
       display: flex;
@@ -208,7 +209,8 @@ hr {
     align-items: center; }
   .card-categories {
     font-size: 12px;
-    padding-left: 7px; }
+    padding-left: 7px;
+    text-align: center; }
     .card-categories-container {
       display: flex;
       justify-content: center;
