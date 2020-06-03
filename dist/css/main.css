@@ -91,7 +91,8 @@ hr {
     margin-top: -10px; }
   .chat-msg--left {
     background: #ededed;
-    margin-right: 15rem; }
+    margin-right: 15rem;
+    text-align: center; }
     .chat-msg--left:after {
       content: '';
       border-left: 10px solid #ededed;
@@ -102,13 +103,14 @@ hr {
       transform: rotate(-90deg); }
   .chat-msg--right {
     background: #6dbbff;
-    margin-left: 15rem; }
+    margin-left: 15rem;
+    text-align: center; }
     .chat-msg--right:after {
       content: '';
       border-right: 10px solid #6dbbff;
       width: 0;
       height: 0;
-      left: 208px;
+      left: 243px;
       top: 15px;
       transform: rotate(90deg); }
   .chat-msg p {
@@ -140,7 +142,7 @@ hr {
   background: none;
   width: 25%;
   z-index: 1;
-  transition: ease-in 250ms; }
+  transition: ease-out 150ms; }
   .chat-reply::before {
     content: '';
     position: absolute;
@@ -156,7 +158,7 @@ hr {
     transform: scaleY(0);
     transform-origin: 50% 100%;
     transition-property: transform;
-    transition: ease-out 250ms;
+    transition: ease-out 150ms;
     z-index: -5; }
   .chat-reply:hover {
     color: white; }

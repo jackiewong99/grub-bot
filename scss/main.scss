@@ -177,6 +177,7 @@ hr {
   &--left {
     background: $gray;
     margin-right: 15rem;
+    text-align: center;
 
     &:after {
       content: '';
@@ -192,13 +193,14 @@ hr {
   &--right {
     background: $blue;
     margin-left: 15rem;
+    text-align: center;
 
     &:after {
       content: '';
       border-right: 10px solid $blue;
       width: 0;
       height: 0;
-      left: 208px;
+      left: 243px;
       top: 15px;
       transform: rotate(90deg);
     }
@@ -237,7 +239,7 @@ hr {
   background: none;
   width: 25%;
   z-index: 1;
-  transition: ease-in 250ms;
+  transition: ease-out 150ms;
 
   &::before {
     content: '';
@@ -254,7 +256,7 @@ hr {
     transform: scaleY(0);
     transform-origin: 50% 100%;
     transition-property: transform;
-    transition: ease-out 250ms;
+    transition: ease-out 150ms;
     z-index: -5;
   }
 
