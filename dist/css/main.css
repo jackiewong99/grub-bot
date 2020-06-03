@@ -272,3 +272,13 @@ hr {
       display: flex;
       justify-content: center;
       align-items: center; }
+
+.error-noresult {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center; }
+  .error-noresult-container {
+    grid-area: chatbot;
+    display: flex;
+    justify-content: center;
+    align-items: center; }

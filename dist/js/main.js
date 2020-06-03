@@ -282,15 +282,33 @@ async function searchRestaurant() {
   // Make sub functions for filtering each user preference (4 step process)
   const filteredRes = await filterResults(searchResult);
 
-  // Then call a async function to pick a random object from filtered array and await it
-  const randomRes = await randomizeRestaurant(filteredRes);
+  if (filteredRes.length === 0) {
+    // Remove loader animation before displaying error message
+    loader.remove();
 
-  // Remove loader animation before displaying restaurant data
-  loader.remove();
+    // Display error message stating that there are no results based on user preferences.
+    const errorContainer = document.createElement('div');
+    const errorMsg = document.createElement('p');
+    errorMsg.innerHTML =
+      'There are no results based on your preferences. Try again?';
+    errorMsg.classList.add('error-noresult');
+    errorContainer.classList.add('error-noresult-container');
+    errorContainer.appendChild(errorMsg);
+    body.appendChild(errorContainer);
 
-  // Then animate the displaying of the restaurant
-  // And display restaurant
-  showRestaurant(randomRes);
+    // After 1 sec, show a left arrow for user to click to go back to home page.
+  } else {
+    // Then call a async function to pick a random object from filtered array and await it
+    const randomRes = await randomizeRestaurant(filteredRes);
+
+    // Remove loader animation before displaying restaurant data
+    loader.remove();
+
+    // Then animate the displaying of the restaurant
+    // And display restaurant
+    console.log(filteredRes);
+    showRestaurant(randomRes);
+  }
 }
 
 async function filterResults(results) {
