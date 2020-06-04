@@ -31,6 +31,9 @@ const PROXY_ADDRESS = 'http://localhost:3000/businesses';
 const CHAT = document.querySelector('.container-chat-msg');
 const REPLIES = document.querySelector('.container-chat-replies');
 
+const closeModalBtn = document.querySelector('.closeBtn');
+const modal = document.querySelector('.modal');
+const modalBtn = document.querySelector('.about-btn');
 const searchResult = [];
 const userPref = [];
 
@@ -350,4 +353,25 @@ async function randomizeRestaurant(results) {
   return results[randomNum];
 }
 
+// Open modal
+function openModal() {
+  modal.style.display = 'block';
+}
+
+// Close modal
+function closeModal() {
+  modal.style.display = 'none';
+}
+
+// Close modal if outside click
+function clickOutside(e) {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+}
+
 chatBot();
+
+modalBtn.addEventListener('click', openModal);
+closeModalBtn.addEventListener('click', closeModal);
+window.addEventListener('click', clickOutside);
