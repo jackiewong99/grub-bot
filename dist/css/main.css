@@ -20,14 +20,21 @@ hr {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-self: center; }
+  align-self: center;
+  align-items: center; }
 
 .project-name {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-right: 5rem;
-  cursor: pointer; }
+  padding-right: 5rem; }
+  .project-name-link {
+    font-size: 32px;
+    font-weight: 700;
+    text-decoration: none;
+    color: black; }
+    .project-name-link:hover {
+      cursor: pointer; }
 
 .about-popup {
   grid-area: header-bar;
