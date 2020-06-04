@@ -1,3 +1,4 @@
+// Variables
 $primary-color: rgb(246, 126, 125);
 $secondary-color: rgb(255, 186, 151);
 $white: rgb(255, 255, 255);
@@ -6,7 +7,6 @@ $black: rgb(0, 0, 0);
 $blue: rgb(109, 187, 255);
 
 // General
-
 body {
   background: $primary-color;
   font-family: 'Poppins', sans-serif;
@@ -26,7 +26,6 @@ hr {
 }
 
 // Home View
-
 .home-view {
   display: grid;
   grid-template-columns: 10% 80% 10%;
@@ -39,11 +38,11 @@ hr {
 }
 
 // Header
-
-.project-logo {
+.header-container {
   grid-area: header-bar;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-self: center;
 }
 
@@ -51,45 +50,9 @@ hr {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding-right: 5rem;
+  cursor: pointer;
 }
-
-// **** DELETE LATER ****
-// .search-section {
-//   grid-area: searchbar;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// .search-bar {
-//   background: $white;
-//   width: 80%;
-//   height: 50%;
-//   display: flex;
-//   flex-direction: column;
-//   align-self: center;
-//   border-radius: 25px;
-
-//   .search-text {
-//     border: none;
-//     border-radius: 25px;
-//     width: 100%;
-//     height: 100px;
-//     font-size: 2rem;
-//     padding: 15px;
-
-//     &::placeholder {
-//       font-size: 2rem;
-//       color: rgb(214, 214, 214);
-//     }
-
-//     &:focus {
-//       outline: none;
-//       box-shadow: 0px 0px 15px $secondary-color;
-//     }
-//   }
-// }
 
 .about-popup {
   grid-area: header-bar;
@@ -99,13 +62,105 @@ hr {
 }
 
 .about-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  position: relative;
+  transition: ease-out 150ms;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: $secondary-color;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    border-radius: 5px;
+    transition-property: transform;
+    transition: ease-out 150ms;
+    z-index: -5;
+  }
+
+  &:hover {
+    color: $white;
+    cursor: pointer;
+
+    &::before {
+      transform: scaleY(1);
+    }
+  }
+
+  &-container {
+    padding-left: 5rem;
+  }
+}
+
+// Modal
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &-content {
+    background: $white;
+    margin: 20% auto;
+    width: 60%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    border-radius: 10px;
+    justify-self: center;
+    align-self: center;
+    animation-name: modalopen;
+    animation-duration: 0.5s;
+  }
+
+  &-header h2 {
+    margin: 0;
+  }
+
+  &-header {
+    background: $secondary-color;
+    color: $white;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  &-body {
+    padding: 10px 20px;
+
+    &-features {
+      margin-bottom: 0;
+    }
+
+    &-list {
+      margin-top: 5px;
+    }
+  }
+}
+
+.closeBtn {
+  color: $white;
+  float: right;
+  font-size: 30px;
+  padding-right: 10px;
+
+  &:hover,
+  &:focus {
+    color: $black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
 
 // Chat Bot
-
 .container-chat {
   grid-area: chatbot;
   display: grid;
@@ -275,7 +330,6 @@ hr {
 }
 
 // Loader
-
 .loader {
   grid-area: chatbot;
   display: flex;
@@ -302,15 +356,7 @@ hr {
   }
 }
 
-@keyframes bounce {
-  to {
-    transform: translate3d(0, -30px, 0);
-    background-color: rgb(255, 185, 151);
-  }
-}
-
 // Restaurant Card
-
 .container-card {
   grid-area: chatbot;
   display: flex;
@@ -470,7 +516,6 @@ hr {
 }
 
 // Error Message
-
 .error-noresult {
   font-size: 1rem;
   font-weight: 700;
@@ -481,5 +526,24 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+// Animations
+@keyframes bounce {
+  to {
+    transform: translate3d(0, -30px, 0);
+    background-color: rgb(255, 185, 151);
+  }
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
   }
 }
