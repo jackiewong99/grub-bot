@@ -266,6 +266,7 @@ hr {
 .container-card {
   grid-area: chatbot;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center; }
 
@@ -367,11 +368,22 @@ hr {
   .card-ref {
     font-size: 12px;
     text-decoration: none;
-    color: black; }
+    color: black;
+    transition: ease-out 0.3s; }
+    .card-ref-arrow {
+      padding-left: 7px;
+      transition: ease-out 0.3s; }
     .card-ref-container {
       display: flex;
       justify-content: center;
       align-items: center; }
+    .card-ref:hover {
+      opacity: 0.5; }
+      .card-ref:hover .animate-arrow {
+        transform: translateX(7px); }
+  .card-credit {
+    font-style: italic;
+    font-size: 12px; }
 
 .error-noresult {
   font-size: 1rem;

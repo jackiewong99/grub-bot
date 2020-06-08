@@ -369,6 +369,7 @@ hr {
 .container-card {
   grid-area: chatbot;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -517,12 +518,31 @@ hr {
     font-size: 12px;
     text-decoration: none;
     color: $black;
+    transition: ease-out 0.3s;
+
+    &-arrow {
+      padding-left: 7px;
+      transition: ease-out 0.3s;
+    }
 
     &-container {
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
+    &:hover {
+      opacity: 0.5;
+
+      .animate-arrow {
+        transform: translateX(7px);
+      }
+    }
+  }
+
+  &-credit {
+    font-style: italic;
+    font-size: 12px;
   }
 }
 

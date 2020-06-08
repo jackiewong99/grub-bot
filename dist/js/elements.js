@@ -64,6 +64,12 @@ export function showRestaurant(restaurant) {
   const phoneNumContainer = getResPhoneNum(restaurant);
   const yelpRefContainer = getYelpRef(restaurant);
 
+  // Credit Yelp Fusion API
+  const creditYelp = document.createElement('p');
+  creditYelp.innerHTML =
+    'All icons, images, and information are provided by the Yelp Fusion API.';
+  creditYelp.classList.add('card-credit');
+
   // Create 'div' container to hold all restaurant information
   const infoContainer = document.createElement('div');
   infoContainer.classList.add('card-info');
@@ -81,6 +87,7 @@ export function showRestaurant(restaurant) {
   resCard.appendChild(imgContainer);
   resCard.appendChild(infoContainer);
   cardContainer.appendChild(resCard);
+  cardContainer.appendChild(creditYelp);
 
   const body = document.querySelector('.home-view');
   body.appendChild(cardContainer);
@@ -276,10 +283,23 @@ function getResPhoneNum(restaurant) {
 function getYelpRef(restaurant) {
   const yelpRefContainer = document.createElement('div');
   const yelpRef = document.createElement('a');
-  yelpRef.innerHTML = 'For more information, view their page on Yelp! ->';
+  const arrowRight = document.createElement('i');
+
+  yelpRef.innerHTML = 'For more information, visit their page on Yelp!';
   yelpRef.href = restaurant.url;
   yelpRef.target = '_blank';
   yelpRef.classList.add('card-ref');
+  yelpRef.appendChild(arrowRight);
+
+  arrowRight.classList.add('fa', 'fa-arrow-right', 'card-ref-arrow');
+  arrowRight.setAttribute('aria-hidden', true);
+  yelpRef.addEventListener('mouseenter', () => {
+    arrowRight.classList.add('animate-arrow');
+  });
+  yelpRef.addEventListener('mouseleave', () => {
+    arrowRight.classList.remove('animate-arrow');
+  });
+
   yelpRefContainer.classList.add('card-ref-container');
   yelpRefContainer.appendChild(yelpRef);
 
