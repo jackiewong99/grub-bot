@@ -294,7 +294,7 @@ async function searchRestaurant() {
     const errorContainer = document.createElement('div');
     const errorMsg = document.createElement('p');
     errorMsg.innerHTML =
-      'There are no results based on your preferences. Try again?';
+      'There are no results based on your preferences. Refresh the page to try again.';
     errorMsg.classList.add('error-noresult');
     errorContainer.classList.add('error-noresult-container');
     errorContainer.appendChild(errorMsg);
