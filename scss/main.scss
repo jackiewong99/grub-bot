@@ -334,8 +334,8 @@ hr {
 }
 
 .hide-chat {
-  display: none;
-  transition: 0.5s all ease;
+  animation-name: hidechat;
+  animation-duration: 0.3s;
 }
 
 // Loader
@@ -565,6 +565,15 @@ hr {
   to {
     transform: translate3d(0, -30px, 0);
     background-color: rgb(255, 185, 151);
+  }
+}
+
+@keyframes hidechat {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

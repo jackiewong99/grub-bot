@@ -165,7 +165,7 @@ function showNextPrompt(prompt, replies, numBtns, numBtnRows) {
             autoScrollChat(searchMsg);
             setTimeout(() => {
               searchRestaurant();
-            }, 1300);
+            }, 2000);
             break;
 
           default:
@@ -205,9 +205,10 @@ function showError(error) {
 
 async function searchRestaurant() {
   const chatArea = document.querySelector('.container-chat');
-  // TEST:
-  // chatArea.style.display = 'none';
   chatArea.classList.add('hide-chat');
+  setTimeout(() => {
+    chatArea.style.display = 'none';
+  }, 150);
 
   const body = document.querySelector('.home-view');
   const loader = document.createElement('div');
