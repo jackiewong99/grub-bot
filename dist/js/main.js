@@ -1,5 +1,3 @@
-// Local Proxy ADDRESS: http://localhost:3000/businesses/offset/latitude/longitude
-
 import {
   CUISINES,
   PRICE_RANGE,
@@ -26,7 +24,8 @@ import {
 } from './filterPref.js';
 
 const OFFSET_MAX_VAL = 1000;
-const PROXY_ADDRESS = 'http://localhost:3000/businesses';
+const PROXY_ADDRESS =
+  'https://custom-history-279904.wl.r.appspot.com/businesses';
 
 const CHAT = document.querySelector('.container-chat-msg');
 const REPLIES = document.querySelector('.container-chat-replies');
