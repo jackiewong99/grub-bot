@@ -311,9 +311,7 @@ async function searchRestaurant() {
     // Remove loader animation before displaying restaurant data
     loader.remove();
 
-    // Then animate the displaying of the restaurant
-    // And display restaurant
-    console.log(filteredRes);
+    // Display restaurant
     showRestaurant(randomRes);
   }
 }
