@@ -205,9 +205,12 @@ function showError(error) {
 
 async function searchRestaurant() {
   const chatArea = document.querySelector('.container-chat');
+  const disclaimer = document.querySelector('.disclaimer');
   chatArea.classList.add('hide-chat');
+  disclaimer.classList.add('hide-chat');
   setTimeout(() => {
     chatArea.style.display = 'none';
+    disclaimer.style.display = 'none';
   }, 150);
 
   const body = document.querySelector('.home-view');

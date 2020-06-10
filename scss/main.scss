@@ -333,6 +333,12 @@ hr {
   }
 }
 
+.disclaimer {
+  grid-area: chatbot;
+  justify-self: center;
+  align-self: flex-end;
+}
+
 .hide-chat {
   animation-name: hidechat;
   animation-duration: 0.3s;
