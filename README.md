@@ -26,6 +26,8 @@ You can view the project here: https://jackiewong99.github.io/grub-bot/
 
 - [Google Cloud Platform](https://cloud.google.com/ 'Google Cloud Platform')
 
+##### **Built with:** HTML / SCSS / JavaScript
+
 ##### _The full folder of icons can be found on the [Yelp Fusion API's](https://www.yelp.com/developers/display_requirements 'Yelp Fusion API') Display Requirements page_.
 
 ---
