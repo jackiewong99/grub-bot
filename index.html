@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      crossorigin="anonymous"
+    />
+    <title>Grub Bot</title>
+  </head>
+  <body class="home-view">
+    <div class="header-container">
+      <div class="project-name">
+        <a href="index.html" class="project-name-link">Grub Bot</a>
+      </div>
+      <div class="about-btn-container">
+        <h1 class="about-btn">About</h1>
+      </div>
+    </div>
+
+    <div class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="closeBtn">&times;</span>
+          <h2>About Grub Bot</h2>
+        </div>
+        <div class="modal-body">
+          <p>
+            Grub Bot was inspired by a Capital One coding challenge. The
+            challenge was to eliminate the indecisive part of finding a place to
+            eat when searching the web. To summarize, the requirements of the
+            original challenge were to make a chat bot that narrows the
+            selection of restaurants, fetches data from the Yelp Fusion API,
+            plots restaurants on a map, and utilizes the Geolocation API.
+          </p>
+
+          <p>
+            However, I decided to only create the main features of what the
+            coding challenge prompts and to iterate on this project in the
+            future, leading to a complete version of my take on the coding
+            challenge. This is because the original challenge was beyond the
+            scope of my skills hence why I did not partake in it and made the
+            statement that this project was inspired by a Capital One coding
+            challenge.
+          </p>
+          <p class="modal-body-features">Current Features:</p>
+          <ul class="modal-body-list">
+            <li>Chat bot</li>
+            <li>Retrieve user's location</li>
+            <li>Fetch data from the Yelp Fusion API</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-chat">
+      <div class="chat-header">
+        <div class="chat-name">
+          <h2>Grub Bot</h2>
+        </div>
+      </div>
+      <div class="chat-separator--top">
+        <hr />
+      </div>
+      <div class="container-chat-msg"></div>
+      <div class="chat-separator--bottom">
+        <hr />
+      </div>
+      <div class="container-chat-replies"></div>
+    </div>
+    <div class="disclaimer">
+      *Some combinations of preferences may show no result.
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
