@@ -6,7 +6,7 @@ As the original challenge was beyond the scope of my skills, I only built a few 
 
 I hope you enjoy viewing/editing this project as much as I enjoyed building it!
 
-You can view the project here:
+You can view the project here: https://jackiewong99.github.io/grub-bot/
 
 \* _This project is not responsive for mobile viewing or any other small to medium screen sizes_.
 
